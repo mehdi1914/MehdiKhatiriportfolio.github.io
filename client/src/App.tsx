@@ -7,12 +7,11 @@ import Home from "@/pages/Home";
 import MagicCursor from "@/components/MagicCursor";
 import Hero from "./components/Hero";
 import Bio from "./components/Bio";
-import Skills from "./components/Skills"; // Added import for Skills component
+import Skills from "./components/Skills";
 import Portfolio from "./components/Portfolio";
 import Navbar from "./components/Navbar";
 
-
-function Router() {
+function AppRouter() {
   return (
     <Switch>
       <Route path="/" component={Home} />
@@ -21,15 +20,17 @@ function Router() {
   );
 }
 
-// Removed duplicate Home component
-
-
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <MagicCursor />
-      <Router />
-      <Toaster />
+      <div className="relative">
+        <MagicCursor />
+        <Navbar />
+        <main>
+          <AppRouter />
+        </main>
+        <Toaster />
+      </div>
     </QueryClientProvider>
   );
 }

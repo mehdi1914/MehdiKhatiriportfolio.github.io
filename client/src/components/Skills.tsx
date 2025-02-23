@@ -59,17 +59,18 @@ export default function Skills() {
         </motion.h2>
         
         <motion.div 
-          className="flex overflow-hidden"
+          className="flex overflow-hidden relative"
         >
           <motion.div 
-            className="flex gap-8 py-4"
+            className="flex gap-8 py-4 absolute"
             animate={{
-              x: ["-25%", "-50%"],
+              x: ["-10%", "-60%"],
               transition: {
                 x: {
-                  duration: 20,
+                  duration: 25,
                   repeat: Infinity,
-                  ease: "linear"
+                  ease: "linear",
+                  repeatType: "loop"
                 }
               }
             }}
