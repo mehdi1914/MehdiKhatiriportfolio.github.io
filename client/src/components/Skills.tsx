@@ -22,93 +22,58 @@ const technologies = [
   { icon: SiGit, name: "Git", color: "#F05032" },
 ];
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2
-    }
-  }
-};
-
-const item = {
-  hidden: { opacity: 0, scale: 0.8 },
-  show: { 
-    opacity: 1, 
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100
-    }
-  }
-};
-
 export default function Skills() {
   return (
     <section id="skills" className="py-20 bg-background/50 backdrop-blur-sm overflow-hidden">
       <div className="container mx-auto px-4">
-        <motion.h2 
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-4xl font-bold mb-16 text-center bg-gradient-to-r from-primary via-purple-400 to-primary text-transparent bg-clip-text bg-[size:200%] animate-gradient"
-        >
-          Skills & Technologies
-        </motion.h2>
-        
-        <motion.div 
-          className="flex overflow-hidden relative"
-        >
-          <motion.div 
-            className="flex gap-8 py-4 absolute"
-            animate={{
-              x: ["-10%", "-60%"],
-              transition: {
-                x: {
-                  duration: 25,
-                  repeat: Infinity,
-                  ease: "linear",
-                  repeatType: "loop"
-                }
-              }
-            }}
-          >
-            {[...technologies, ...technologies].map((tech, index) => (
-              <motion.div
-                key={`${tech.name}-${index}`}
-                variants={item}
-                whileHover={{ 
-                  scale: 1.05,
-                  rotate: [0, -2, 2, 0],
-                  transition: { duration: 0.3 }
-                }}
-                className="flex flex-col items-center p-6 rounded-xl bg-background/30 backdrop-blur-md border border-primary/10 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 min-w-[200px]"
-              >
-                <tech.icon 
-                  className="w-16 h-16 mb-4 transition-colors duration-300" 
-                  style={{ color: tech.color }}
-                />
-                <motion.span 
-                  className="font-medium text-muted-foreground"
-                  whileHover={{ color: tech.color }}
-                >
-                  {tech.name}
-                </motion.span>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 text-center"
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center"
         >
-          <h3 className="text-2xl font-semibold text-primary mb-4">More Skills Coming Soon</h3>
-          <p className="text-muted-foreground">Stay tuned for updates on additional technologies and capabilities!</p>
+          <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-primary to-purple-400 text-transparent bg-clip-text inline-block">
+            Skills & Technologies
+          </h2>
+          <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">
+            A curated stack of modern technologies I use to bring ideas to life
+          </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {technologies.map((tech, index) => (
+              <motion.div
+                key={tech.name}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ 
+                  opacity: 1, 
+                  scale: 1,
+                  transition: {
+                    delay: index * 0.1,
+                    duration: 0.5,
+                    type: "spring",
+                    stiffness: 100
+                  }
+                }}
+                viewport={{ once: true }}
+                whileHover={{ 
+                  scale: 1.05,
+                  transition: { duration: 0.2 }
+                }}
+                className="p-6 rounded-xl bg-background/30 backdrop-blur-md border border-primary/10 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
+              >
+                <div className="flex flex-col items-center gap-4">
+                  <tech.icon 
+                    className="w-12 h-12 transition-transform duration-300 group-hover:scale-110" 
+                    style={{ color: tech.color }}
+                  />
+                  <span className="font-medium text-muted-foreground group-hover:text-primary transition-colors duration-300">
+                    {tech.name}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
